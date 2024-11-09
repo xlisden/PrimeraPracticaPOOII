@@ -9,6 +9,7 @@
 <title>Listar clientes</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+
 <script>
 	function verPrestamos(id){
 		if(confirm("¿Desea ver los préstamos del cliente?") == true){
@@ -27,6 +28,15 @@
 	}
 </script>
 
+<style>
+	.col form {
+		display: flex;
+	    justify-content: space-between;
+	    align-items: center; 
+	    gap: 20px;
+	}
+</style>
+
 </head>
 <body>
 
@@ -35,8 +45,19 @@
 <% %>
 
 <div class="container">
-  <br>
-  <a href="<%=url%>ClientesController?operacion=nuevo" class="btn btn-primary"> Nuevo cliente </a>
+  <br>	
+  <div class="row">
+  	<div class="col">
+  		<a href="<%=url%>ClientesController?operacion=nuevo" class="btn btn-primary"> Nuevo cliente </a>
+  	</div>
+  	<div class="col">
+  		<form role="form" action="<%=url%>ClientesController" method="POST">
+  			<input type="hidden" name="operacion" value="listar">
+  			<input type="search" class="form-control" name="nomCliente" value="" placeholder="Ingrese el nombre del cliente...">
+  			<input type="submit" class="btn btn-outline-primary" value="Buscar">
+  		</form>
+  	</div>
+  </div>
   <br> <p></p>
   <table id="tabla" class="table table-bordered">
   	<thead>

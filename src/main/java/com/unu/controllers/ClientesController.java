@@ -68,14 +68,15 @@ public class ClientesController extends HttpServlet {
 	
 	protected void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			request.setAttribute("clientes", clientesModel.listarClientes());
+			String nomCliente = request.getParameter("nomCliente");
 			
-			Iterator<Cliente> it = clientesModel.listarClientes().iterator();
-			if(it.hasNext()) {
-				Cliente cliente = it.next();
-			}
-			
-			request.getRequestDispatcher("/clientes/listarClientes.jsp").forward(request, response);;
+		 	if(nomCliente == null || nomCliente.equalsIgnoreCase("")){
+		 		request.setAttribute("clientes", clientesModel.listarClientes());
+		 	}else{
+		 		request.setAttribute("clientes", clientesModel.listarClientesPorBusqueda(nomCliente));
+		 	}
+		 	
+			request.getRequestDispatcher("/clientes/listarClientes.jsp").forward(request, response);
 		} catch (Exception e) {
 			System.out.println("listar() " + e.getMessage());
 		}
@@ -151,5 +152,6 @@ public class ClientesController extends HttpServlet {
 			System.out.println("obtener() " + e.getMessage());
 		}
 	}
+	
 
 }

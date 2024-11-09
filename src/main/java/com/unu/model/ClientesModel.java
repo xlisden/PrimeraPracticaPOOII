@@ -32,6 +32,7 @@ public class ClientesModel {
 				cliente.setFechaNacimiento(rs.getString("fechaNacimiento"));
 				cliente.setDireccion(rs.getString("direccion"));
 				clientes.add(cliente);
+//				System.out.println("---> " + cliente.getNombres());
 			}
 
 			conexion = Conexion.closeConnection();
@@ -65,25 +66,25 @@ public class ClientesModel {
 		return filasAfectadas;
 	}
 
-	public List<String> listarClientesPorNombres() {
-		List<String> clientes = null;
-		try {
-			String sql = "CALL spReadClientesPorNombres();";
-			clientes = new ArrayList<String>();
-			conexion = Conexion.openConnection();
-			cs = conexion.prepareCall(sql);
-			rs = cs.executeQuery();
-
-			while (rs.next()) {
-				String cliente = rs.getString("cliente");
-			}
-
-			conexion = Conexion.closeConnection();
-		} catch (Exception e) {
-			System.out.println("listarClientesPorNombres() " + e.getMessage());
-		}
-		return clientes;
-	}
+//	public List<String> listarClientesPorNombres() {
+//		List<String> clientes = null;
+//		try {
+//			String sql = "CALL spReadClientesPorNombres();";
+//			clientes = new ArrayList<String>();
+//			conexion = Conexion.openConnection();
+//			cs = conexion.prepareCall(sql);
+//			rs = cs.executeQuery();
+//
+//			while (rs.next()) {
+//				String cliente = rs.getString("cliente");
+//			}
+//
+//			conexion = Conexion.closeConnection();
+//		} catch (Exception e) {
+//			System.out.println("listarClientesPorNombres() " + e.getMessage());
+//		}
+//		return clientes;
+//	}
 
 	public Cliente listarClientePorId(int idcliente) {
 		Cliente cliente = null;
@@ -110,32 +111,6 @@ public class ClientesModel {
 		}
 		return cliente;
 	}
-
-//	public Cliente listarClientePorNombre(String nomCliente) {
-//		Cliente cliente = null;
-//		try {
-//			String sql = "CALL spReadClientesPorNombre(?);";
-//			conexion = Conexion.openConnection();
-//			cs = conexion.prepareCall(sql);
-//			cs.setString(1, nomCliente);
-//			rs = cs.executeQuery();
-//			
-//			if(rs.next()) {
-//				cliente = new Cliente();
-//				cliente.setIdcliente(rs.getInt("idcliente"));
-//				cliente.setNombres(rs.getString("nombres"));
-//				cliente.setApellidos(rs.getString("apellidos"));
-//				cliente.setDni(rs.getString("dni"));
-//				cliente.setFechaNacimiento(rs.getString("fechaNacimiento"));
-//				cliente.setDireccion(rs.getString("direccion"));
-//			}
-//			
-//			conexion = Conexion.closeConnection();
-//		} catch (Exception e) {
-//			System.out.println("listarClientePorNombre() " + e.getMessage());
-//		}
-//		return cliente;
-//	}
 
 	public int modificarCliente(Cliente cliente) {
 		int filasAfectadas = 0;
@@ -180,5 +155,34 @@ public class ClientesModel {
 			System.out.println("eliminarCliente() " + e.getMessage());
 		}
 		return filasAfectadas;
+	}	
+	
+	public List<Cliente> listarClientesPorBusqueda(String nomCliente) {
+//		System.out.println("---> model  " + nomCliente);
+		List<Cliente> clientes = null;
+		try {
+			String sql = "CALL spReadClientesPorBusqueda(?);";
+			clientes = new ArrayList<Cliente>();
+			conexion = Conexion.openConnection();
+			cs = conexion.prepareCall(sql);
+			cs.setString(1, nomCliente);
+			rs = cs.executeQuery();
+
+			while (rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setIdcliente(rs.getInt("idcliente"));
+				cliente.setNombres(rs.getString("nombres"));
+				cliente.setApellidos(rs.getString("apellidos"));
+				cliente.setDni(rs.getString("dni"));
+				cliente.setFechaNacimiento(rs.getString("fechaNacimiento"));
+				cliente.setDireccion(rs.getString("direccion"));
+				clientes.add(cliente);
+			}
+
+			conexion = Conexion.closeConnection();
+		} catch (Exception e) {
+			System.out.println("listarClientesPorBusqueda() " + e.getMessage());
+		}
+		return clientes;
 	}	
 }
