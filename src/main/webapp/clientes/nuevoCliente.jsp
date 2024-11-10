@@ -17,11 +17,11 @@
 	<div class="form-group">
 	<form role="form" action="<%=url%>ClientesController" method="POST">
 		<input type="hidden" name="operacion" value="insertar"> <p></p>
-		<input type="text" name="nombres" placeholder="Nombres" class="form-control"> <p></p>
-		<input type="text" name="apellidos" placeholder="Apellidos" class="form-control"> <p></p>
-		<input type="number" name="dni" placeholder="DNI" class="form-control"> <p></p>
-		<input type="text" name="fechaNacimiento" placeholder="yyyy-mm-dd" class="form-control"> <p></p>
-		<input type="text" name="direccion" placeholder="Direccion" class="form-control"> <p></p>
+		<input type="text" name="nombres" placeholder="Nombres: Ana María" class="form-control"> <p></p>
+		<input type="text" name="apellidos" placeholder="Apellidos: Alcachofa Fernández" class="form-control"> <p></p>
+		<input type="number" name="dni" placeholder="DNI: 04923473" class="form-control"> <p></p>
+		<input type="text" name="fechaNacimiento" placeholder="Fecha de nacimiento: yyyy-mm-dd" class="form-control"> <p></p>
+		<input type="text" name="direccion" placeholder="Dirección: Jr. Los Andes 234" class="form-control"> <p></p>
 		<br>
 		<input type="submit" value="Guardar" class="btn btn-primary">
 		<a href="<%=url%>ClientesController?operacion=listar" class="btn btn-outline-primary"> Volver </a>

@@ -32,7 +32,7 @@ CREATE TABLE `cliente` (
   `fechaNacimiento` date DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idcliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (2,'Marco','Gonzales','03834542','2000-02-21','Av El sol 234'),(3,'Pedro','Garcia','03834542','1995-09-23','Jr Rio Tumbes 235'),(4,'Diana','Spencer','03834542','1985-03-22','En el mas alla'),(5,'Java','C++','03834542','1900-02-24','Jr Las Frutas 269'),(7,'Bruno','Marte','03834542','1989-12-13','En Washington'),(8,'Paula','Perez','03834542','1999-12-24','Jr Libertad 345');
+INSERT INTO `cliente` VALUES (2,'Marco','Gonzales','03834542','2000-02-21','Av El sol 234'),(3,'Pedro','Garcia','03834542','1995-09-23','Jr Rio Tumbes 235'),(4,'Diana','Spencer','03834542','1985-03-22','En el mas alla'),(5,'Java','C++','03834542','1900-02-24','Jr Las Frutas 269'),(7,'Bruno','Marte','03834542','1989-12-13','En Washington'),(8,'Paula','Perez','03834542','1999-12-24','Jr Libertad 345'),(10,'Cliente1','Apellido1','12345678','1992-12-23','Jr Frutitas 123'),(12,'Alfonso','Herrera','72342028',NULL,'Jr Los Rosales 456'),(13,'Cliente2','Apellido2','12734838',NULL,'Jr Los Buhos 234');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `prestamo` (
   PRIMARY KEY (`idprestamo`),
   KEY `idcliente_idx` (`idcliente`),
   CONSTRAINT `idcliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `prestamo` (
 
 LOCK TABLES `prestamo` WRITE;
 /*!40000 ALTER TABLE `prestamo` DISABLE KEYS */;
-INSERT INTO `prestamo` VALUES (1,'2024-01-01',12000.00,7,5,10),(31,'2024-09-05',15000.00,3,10,24),(32,'2024-11-02',20000.00,3,4,18),(35,'2024-11-01',10000.00,NULL,5,12),(36,'2024-10-01',15000.00,NULL,6,24),(37,'2024-11-01',10000.00,NULL,5,12),(38,'2024-10-01',15000.00,NULL,6,24),(41,'2024-11-01',2346.00,5,32,2);
+INSERT INTO `prestamo` VALUES (1,'2024-01-01',12000.00,7,5,10),(31,'2024-09-05',15000.00,3,10,24),(32,'2024-11-02',20000.00,3,4,18),(35,'2024-11-01',10000.00,NULL,5,12),(36,'2024-10-01',15000.00,NULL,6,24),(37,'2024-11-01',10000.00,NULL,5,12),(38,'2024-10-01',15000.00,NULL,6,24),(41,'2024-11-01',2346.00,5,32,2),(42,'2024-03-12',9000.00,5,10,4),(44,'2024-03-12',9000.00,10,10,4),(45,'2023-12-31',4000.00,13,12,18);
 /*!40000 ALTER TABLE `prestamo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spCreateCliente`(
 	IN nombres VARCHAR(45),
     IN apellidos VARCHAR(45),
     IN dni VARCHAR(8),
-    IN fechaNaciemiento VARCHAR(45),
+    IN fechaNaciemiento DATE,
     IN direccion VARCHAR(100)
 )
 BEGIN
@@ -104,7 +104,7 @@ BEGIN
 	`fechaNacimiento`,
 	`direccion`)
 	VALUES
-    (0, nombres, apellidos, dni, STR_TO_DATE(fechaNacimiento, '%Y-%m-%d'), direccion);
+    (0, nombres, apellidos, dni, fechaNacimiento, direccion);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -391,7 +391,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spUpdateCliente`(
 	IN nombres VARCHAR(45),
     IN apellidos VARCHAR(45),
     IN dni VARCHAR(8),
-    IN fechaNaciemiento VARCHAR(45),
+    IN fechaNaciemiento DATE,
     IN direccion VARCHAR(100)
 )
 BEGIN
@@ -454,4 +454,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-08 23:04:05
+-- Dump completed on 2024-11-09 21:21:51

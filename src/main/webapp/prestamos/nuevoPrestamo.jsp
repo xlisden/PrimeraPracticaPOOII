@@ -21,18 +21,20 @@
    }
 %>
 <% int idcliente = cliente.getIdcliente(); %>
+<% String datosCliente = cliente.getNombres() + " " + cliente.getApellidos() ; %>
 
 <div class="container">
 	<br>
-	<h3> Nuevo prestamo </h3>
+	<h3> Nuevo préstamo </h3>
+	<p class="fs-4"> Cliente: <%= datosCliente %> </p>
 	<div class="form-group">
 	<form role="form" action="<%=url%>PrestamosController" method="POST">
 		<input type="hidden" name="operacion" value="insertar"> <p></p>
 		<input type="hidden" name="idcliente" value="<%=idcliente%>"> <p></p>
-		<input type="text" name="fechaPrestamo" placeholder="yyyy-mm-dd" class="form-control"> <p></p>
-		<input type="number" name="monto" placeholder="Monto" class="form-control"> <p></p>
-		<input type="number" name="interes" placeholder="Interes" class="form-control"> <p></p>
-		<input type="number" name="nroCuotas" placeholder="Nro cuotas" class="form-control"> <p></p>
+		<input type="text" name="fechaPrestamo" placeholder="Fecha de préstamo: yyyy-mm-dd" class="form-control"> <p></p>
+		<input type="number" name="monto" placeholder="Monto (S/.): 3400" class="form-control"> <p></p>
+		<input type="number" name="interes" placeholder="Interes (%): 20" class="form-control"> <p></p>
+		<input type="number" name="nroCuotas" placeholder="Nro. cuotas: 18" class="form-control"> <p></p>
 		<br>
 		<input type="submit" value="Guardar" class="btn btn-primary">
 		<a href="<%=url%>PrestamosController?operacion=listar&idcliente=<%=idcliente%>" class="btn btn-outline-primary"> Volver </a>
