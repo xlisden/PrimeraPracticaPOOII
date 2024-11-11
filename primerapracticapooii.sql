@@ -298,7 +298,7 @@ BEGIN
 
 	SELECT *
     FROM cliente c
-    WHERE c.nombres LIKE CONCAT('%', nomCliente, '%') OR c.apellidos LIKE CONCAT('%', nomCliente, '%');
+    WHERE c.nombres LIKE CONCAT('%', nomCliente, '%') OR c.apellidos LIKE CONCAT('%', nomCliente, '%') OR CONCAT(c.nombres, ' ', c.apellidos) LIKE nomCliente;
     
 END ;;
 DELIMITER ;
@@ -454,4 +454,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-09 21:21:51
+-- Dump completed on 2024-11-11 11:06:40
